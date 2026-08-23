@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For Muskan ✦ A Little Universe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body class="locked">
+
+  <!-- fine film-grain texture, sits above everything, purely decorative -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- scroll progress -->
+  <div class="progress-rail" aria-hidden="true"><div class="progress-fill" id="progress-fill"></div></div>
+
+  <!-- background layers (animate underneath the gate too, for atmosphere) -->
+  <canvas id="sky"></canvas>
+  <canvas id="galaxy"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <!-- ============ SIGNATURE GATE ============ -->
+  <div class="gate" id="gate">
+    <div class="gate-inner">
+      <p class="eyebrow">SIGN YOUR NAME TO OPEN</p>
+      <p class="gate-sub">Trace it, scribble it, make it messy — it just has to be yours.</p>
+
+      <div class="gate-canvas-wrap">
+        <p class="gate-ghost" id="gate-ghost" aria-hidden="true">Muskan</p>
+        <canvas id="gate-canvas"></canvas>
+      </div>
+
+      <p class="gate-hint" id="gate-hint">keep going — sign all the way across ✦</p>
+      <button type="button" class="ghost-btn gate-clear" id="gate-clear">clear and try again</button>
+    </div>
+  </div>
+
+  <!-- ============ MAIN SITE (revealed once she signs) ============ -->
+  <main class="site" id="site">
+
+    <!-- ============ HEADER ============ -->
+    <header class="site-header" id="site-header">
+      <button class="brand" data-target="hero" aria-label="Back to the top">
+        <svg viewBox="0 0 120 70" class="mark-svg mark-svg-tiny" aria-hidden="true">
+          <polyline points="10,62 10,8 62,55 100,8 100,62" fill="none" />
+          <circle cx="10" cy="62" r="2.4" /><circle cx="10" cy="8" r="2.4" />
+          <circle cx="62" cy="55" r="2.4" /><circle cx="100" cy="8" r="2.4" /><circle cx="100" cy="62" r="2.4" />
+        </svg>
+        <span>for Muskan</span>
+      </button>
+
+      <nav class="header-nav" aria-label="Section navigation">
+        <button class="nav-link" data-target="hero">begin</button>
+        <button class="nav-link" data-target="wishes">wishes</button>
+        <button class="nav-link" data-target="moments">moments</button>
+        <button class="nav-link" data-target="bouquet">bouquet</button>
+        <button class="nav-link" data-target="reveal">the letter</button>
+        <button class="nav-link" data-target="secret">secret</button>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="sound-toggle" type="button" aria-pressed="false" aria-label="Toggle ambient sound">
+          <svg class="icon-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 5V4L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M19 6a9 9 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.6"/></svg>
+          <svg class="icon-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 5V4L8 9H4z"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- ============ HERO ============ -->
+    <section id="hero" class="section hero-section">
+      <button class="hero-catcher" id="hero-catcher" aria-hidden="true" tabindex="-1"></button>
+      <div class="hero-props" aria-hidden="true">
+        <div class="orbit-moon"></div>
+        <div class="drift-comet"></div>
+        <div class="dust-mote m1"></div>
+        <div class="dust-mote m2"></div>
+        <div class="dust-mote m3"></div>
+        <div class="dust-mote m4"></div>
+        <div class="dust-mote m5"></div>
+        <div class="dust-mote m6"></div>
+      </div>
+
+      <p class="section-index" aria-hidden="true">01 — BEGIN</p>
+
+      <div class="hero-grid">
+        <div class="hero-copy slide-in">
+          <div class="mark" aria-hidden="true">
+            <svg viewBox="0 0 120 70" class="mark-svg hero-mark">
+              <polyline points="10,62 10,8 62,55 100,8 100,62" fill="none" />
+              <circle cx="10" cy="62" r="2.2" /><circle cx="10" cy="8" r="2.2" />
+              <circle cx="62" cy="55" r="2.2" /><circle cx="100" cy="8" r="2.2" /><circle cx="100" cy="62" r="2.2" />
+            </svg>
+          </div>
+          <p class="eyebrow">A LITTLE UNIVERSE, JUST FOR YOU</p>
+          <h1 class="hero-title">For <em>Muskan</em></h1>
+          <p class="hero-sub">I mapped the sky and it's counting down to your day.</p>
+          <p class="hero-tip">✦ tap anywhere in the empty sky to send a star across ✦</p>
+        </div>
+
+        <div class="hero-card countdown-panel ornate">
+          <p class="countdown-kicker">counting down to</p>
+          <p class="countdown-date">September 8th</p>
+          <div class="countdown" id="countdown">
+            <div class="cd-node">
+              <span class="cd-num" id="cd-days">00</span>
+              <span class="cd-label">days</span>
+            </div>
+            <span class="cd-sep">:</span>
+            <div class="cd-node">
+              <span class="cd-num" id="cd-hours">00</span>
+              <span class="cd-label">hours</span>
+            </div>
+            <span class="cd-sep">:</span>
+            <div class="cd-node">
+              <span class="cd-num" id="cd-mins">00</span>
+              <span class="cd-label">mins</span>
+            </div>
+            <span class="cd-sep">:</span>
+            <div class="cd-node">
+              <span class="cd-num" id="cd-secs">00</span>
+              <span class="cd-label">secs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="scroll-cue" id="scroll-cue" aria-label="Scroll down">
+        <span></span>
+      </button>
+    </section>
+
+    <!-- ============ WISH STARS ============ -->
+    <section id="wishes" class="section">
+      <p class="section-index" aria-hidden="true">02 — WISHES</p>
+
+      <div class="wishes-grid">
+        <div class="wishes-copy slide-in-right">
+          <p class="eyebrow">TOUCH THE SKY</p>
+          <h2 class="section-title">Find every star</h2>
+          <p class="section-sub">
+            Eight small stars, eight small reasons. Tap each one — once you've
+            found them all, they'll draw themselves into something.
+          </p>
+          <p class="progress-text"><span id="found-count">0</span> / 8 stars found</p>
+        </div>
+
+        <div class="constellation-wrap slide-diagonal">
+          <svg id="constellation-lines" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet"></svg>
+          <div class="star-field" id="star-field"></div>
+        </div>
+      </div>
+
+      <div class="wish-card" id="wish-card" hidden>
+        <span class="wish-quote" aria-hidden="true">&#10077;</span>
+        <button class="wish-close" id="wish-close" aria-label="Close">&times;</button>
+        <p id="wish-text"></p>
+      </div>
+    </section>
+
+    <!-- ============ MOMENTS / GALLERY ============ -->
+    <section id="moments" class="section">
+      <p class="section-index" aria-hidden="true">03 — MOMENTS</p>
+
+      <div class="section-head slide-in">
+        <p class="eyebrow">KEEPSAKES</p>
+        <h2 class="section-title">A few moments</h2>
+        <p class="section-sub">Drop your favourite photos of you two into the frames below — click any photo to see it larger.</p>
+      </div>
+
+      <div class="frame-grid slide-diagonal">
+        <!--
+          HOW TO ADD YOUR OWN PHOTOS:
+          1. Put your image files in an "images" folder next to this HTML file.
+          2. Replace the src="" below with e.g. "images/photo1.jpg"
+          3. Change the caption text in the figcaption if you'd like.
+          4. Add or remove <figure class="frame"> blocks freely — frame-a is
+             the large tile, frame-b/frame-c are the smaller ones.
+        -->
+        <figure class="frame frame-a">
+          <div class="frame-inner">
+            <img src="" alt="Add a photo of you two" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="frame-placeholder"><span class="frame-plus">+</span><span>add photo</span></div>
+          </div>
+          <figcaption class="frame-caption">one</figcaption>
+        </figure>
+        <figure class="frame frame-b">
+          <div class="frame-inner">
+            <img src="" alt="Add a photo of you two" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="frame-placeholder"><span class="frame-plus">+</span><span>add photo</span></div>
+          </div>
+          <figcaption class="frame-caption">two</figcaption>
+        </figure>
+        <figure class="frame frame-c">
+          <div class="frame-inner">
+            <img src="" alt="Add a photo of you two" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="frame-placeholder"><span class="frame-plus">+</span><span>add photo</span></div>
+          </div>
+          <figcaption class="frame-caption">three</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ A LITTLE BOUQUET ============ -->
+    <section id="bouquet" class="section">
+      <p class="section-index" aria-hidden="true">04 — A LITTLE BOUQUET</p>
+
+      <div class="section-head slide-in-right">
+        <p class="eyebrow">PICKED FOR YOU</p>
+        <h2 class="section-title">Watch it bloom</h2>
+        <p class="section-sub">Tap each bud, whenever you like — no rush, they'll wait.</p>
+      </div>
+
+      <div class="bouquet-wrap slide-diagonal">
+        <svg id="bouquet-svg" class="bouquet-svg" viewBox="0 0 420 400" role="img" aria-label="An interactive bouquet — tap the flowers to make them bloom">
+          <g id="bouquet-stems"></g>
+          <g id="bouquet-flowers"></g>
+          <g id="bouquet-wrap-ribbon"></g>
+        </svg>
+      </div>
+
+      <p class="progress-text"><span id="bloom-count">0</span> / 7 in bloom</p>
+
+      <div class="bouquet-result reveal" id="bouquet-result" hidden>
+        <span class="wish-quote" aria-hidden="true">&#10077;</span>
+        <p>for you — every bloom, on purpose.</p>
+      </div>
+      <button class="ghost-btn bouquet-reset" id="bouquet-reset" type="button" hidden>gather it again</button>
+    </section>
+
+    <!-- ============ REVEAL ============ -->
+    <section id="reveal" class="section">
+      <p class="section-index" aria-hidden="true">05 — THE LETTER</p>
+
+      <div id="locked-state" class="slide-in">
+        <div class="seal" aria-hidden="true">
+          <svg viewBox="0 0 120 70" class="mark-svg mark-svg-small">
+            <polyline points="10,62 10,8 62,55 100,8 100,62" fill="none" />
+            <circle cx="10" cy="62" r="2.2" /><circle cx="10" cy="8" r="2.2" />
+            <circle cx="62" cy="55" r="2.2" /><circle cx="100" cy="8" r="2.2" /><circle cx="100" cy="62" r="2.2" />
+          </svg>
+        </div>
+        <p class="eyebrow">SEALED UNTIL SEPTEMBER 8TH</p>
+        <h2 class="section-title">One more thing</h2>
+        <p class="section-sub">There's a letter waiting here. It'll open itself on your day —</p>
+        <button id="unlock-early" class="ghost-btn">or open it early, if you can't wait</button>
+      </div>
+
+      <div id="unlocked-state" class="letter-grid" hidden>
+        <div class="burst" id="burst" aria-hidden="true"></div>
+
+        <div class="letter-main slide-in">
+          <p class="eyebrow">HAPPY BIRTHDAY</p>
+          <h2 class="letter-title">Dear Muskan,</h2>
+          <div class="letter-body">
+            <p>
+              This site is a small, silly, over-engineered way of saying: I'm really
+              glad you exist. [Replace this paragraph with your real letter — talk
+              about a memory, something you admire about her, an inside joke,
+              whatever feels like you.]
+            </p>
+            <p>
+              Here's to another year of the same chaos, the same laughs, and the
+              same person I'm lucky to call a friend.
+            </p>
+          </div>
+          <p class="letter-sign">— from your favourite constellation-builder</p>
+        </div>
+
+        <aside class="letter-aside slide-diagonal">
+          <div class="seal seal-lit" aria-hidden="true">
+            <svg viewBox="0 0 120 70" class="mark-svg mark-svg-small">
+              <polyline points="10,62 10,8 62,55 100,8 100,62" fill="none" />
+              <circle cx="10" cy="62" r="2.2" /><circle cx="10" cy="8" r="2.2" />
+              <circle cx="62" cy="55" r="2.2" /><circle cx="100" cy="8" r="2.2" /><circle cx="100" cy="62" r="2.2" />
+            </svg>
+          </div>
+          <dl class="letter-meta">
+            <div><dt>date</dt><dd>September 8th</dd></div>
+            <div><dt>from</dt><dd>a friend who maps skies</dd></div>
+          </dl>
+
+          <div class="star-note">
+            <label for="note-input">Leave a little wish for yourself in the sky</label>
+            <div class="star-note-row">
+              <input type="text" id="note-input" maxlength="60" placeholder="Type something, then press add" />
+              <button id="note-add">Add star</button>
+            </div>
+            <button type="button" class="star-collection-toggle" id="stars-toggle">view your stars ✦</button>
+            <ul class="star-list" id="star-list" hidden></ul>
+          </div>
+
+          <button id="download-letter" class="ghost-btn download-btn" type="button">save this letter as a keepsake</button>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ LOCKED NOTE (finale) ============ -->
+    <section id="secret" class="section">
+      <p class="section-index" aria-hidden="true">06 — FOR YOUR EYES ONLY</p>
+
+      <div class="section-head slide-in-right">
+        <p class="eyebrow">ONE LAST PAGE</p>
+        <h2 class="section-title">This part is locked</h2>
+        <p class="section-sub">
+          There's a password on this one. [Tell her how to find it, or leave
+          the hint below as-is.]
+        </p>
+      </div>
+
+      <div class="lock-panel ornate slide-diagonal" id="lock-panel">
+        <svg class="lock-icon" id="lock-icon" viewBox="0 0 40 40" aria-hidden="true">
+          <rect x="9" y="18" width="22" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path id="lock-shackle" d="M14 18v-5a6 6 0 0 1 12 0v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="20" cy="25" r="1.8" fill="currentColor"/>
+        </svg>
+
+        <form id="lock-form" class="lock-form" autocomplete="off">
+          <label for="lock-input" class="sr-only">Enter the password</label>
+          <input type="password" id="lock-input" placeholder="enter the password" autocomplete="off" spellcheck="false" />
+          <button type="submit" class="ghost-btn">unlock</button>
+        </form>
+
+        <p class="lock-hint" id="lock-hint">hint: her birthday, four digits, no spaces</p>
+        <p class="lock-error" id="lock-error" hidden>that's not quite it — try again ✦</p>
+      </div>
+
+      <div class="secret-note" id="secret-note" hidden>
+        <span class="wish-quote" aria-hidden="true">&#10077;</span>
+        <p>[This is the truly private part — write whatever you wouldn't put
+          anywhere else on this page. It only exists here, behind the lock.]</p>
+        <p class="letter-sign">— only for you</p>
+      </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <svg viewBox="0 0 120 70" class="mark-svg mark-svg-small" aria-hidden="true">
+            <polyline points="10,62 10,8 62,55 100,8 100,62" fill="none" />
+            <circle cx="10" cy="62" r="2.2" /><circle cx="10" cy="8" r="2.2" />
+            <circle cx="62" cy="55" r="2.2" /><circle cx="100" cy="8" r="2.2" /><circle cx="100" cy="62" r="2.2" />
+          </svg>
+          <p>for Muskan, from a friend who maps skies.</p>
+        </div>
+        <nav class="footer-links" aria-label="Section navigation">
+          <button class="nav-link" data-target="hero">begin</button>
+          <button class="nav-link" data-target="wishes">wishes</button>
+          <button class="nav-link" data-target="moments">moments</button>
+          <button class="nav-link" data-target="bouquet">bouquet</button>
+          <button class="nav-link" data-target="reveal">the letter</button>
+          <button class="nav-link" data-target="secret">secret</button>
+        </nav>
+      </div>
+      <div class="footer-rule" aria-hidden="true"></div>
+      <p class="footer-fine">made with care, one star at a time ✦</p>
+    </footer>
+
+  </main>
+
+  <!-- floating controls, revealed with the site -->
+  <button class="to-top" id="to-top" type="button" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <!-- quiet corner signature -->
+  <div class="monogram" aria-hidden="true">for M. ✦</div>
+
+  <!-- photo lightbox -->
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
+    <img src="" alt="" id="lightbox-img" />
+    <p class="lightbox-caption" id="lightbox-caption"></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
