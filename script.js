@@ -5,14 +5,14 @@ const BIRTHDAY_MONTH = 9;   // September
 const BIRTHDAY_DAY   = 8;
 
 const WISHES = [
-  "That time you made me laugh so hard I couldn't breathe.",
-  "You always remember the small stuff. That's rare.",
+  "Don’t overthink what you can’t control..",
+  "Choose peace over unnecessary worries.",
   "Thank you for being my personal hype committee.",
   "You've got the kind of honesty I actually trust.",
   "Every plan is better when you're in it.",
   "You make ordinary days feel like an event.",
-  "I'm genuinely lucky to have you as a friend.",
-  "Here's to more chaos, more inside jokes, more us."
+  "Keep your heart kind and your mind calm",
+  "Here's to more chaos, more inside jokes, more us.",
 ];
 
 // positions in an 800x500 canvas — the first 5 trace an "M"
